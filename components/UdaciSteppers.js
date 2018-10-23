@@ -1,12 +1,22 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { FontAwesome, Entypo } from '@expo/vector-icons';
 
-export default class UdaciSteppers extends React.Component {
-    render() {
-        return (
+export default function UdaciSteppers ({ value, unit, onIncrement, onDecrement }) {
+    return (
+        <View>
             <View>
-                <Text>Hola Mundo</Text>
+                <TouchableOpacity onPress={onDecrement}>
+                    <FontAwesome name="minus" color={'black'} size={30}></FontAwesome>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onIncrement}>
+                    <FontAwesome name="plus" color={'black'} size={30}></FontAwesome>
+                </TouchableOpacity>
             </View>
-        );
-    }
-}
+            <View>
+                <Text>{value}</Text>
+                <Text>{unit}</Text>
+            </View>
+        </View>
+    );
+};
