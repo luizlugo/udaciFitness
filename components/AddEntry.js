@@ -7,6 +7,8 @@ import DateHeader from './DateHeader';
 import { Ionicons } from '@expo/vector-icons';
 import TextButton from './TextButton';
 import { submitEntry, removeEntry } from '../utils/api';
+import { connect } from 'react-redux';
+import { addEntry } from '../actions';
 
 function submitBtn(onPress) {
     return (
@@ -16,7 +18,7 @@ function submitBtn(onPress) {
     );
 }
 
-export default class AddEntry extends React.Component {
+class AddEntry extends React.Component {
     state = {
         run: 0,
         bike: 0,
@@ -63,6 +65,10 @@ export default class AddEntry extends React.Component {
             eat: 0
         }));
         // Update redux
+        const { dispatch } = this.props;
+        dispatch(addEntry({
+            [key]: entry
+        }));
         // Navigate to home
         // Save data to database
         submitEntry({key, entry});
@@ -120,3 +126,4 @@ export default class AddEntry extends React.Component {
         )
     }
 }
+export default connect()(AddEntry);
